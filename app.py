@@ -1,9 +1,11 @@
 from pywebio.input import *
 from pywebio.output import *
+from pywebio import start_server
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import numpy as np
+import argparse
 
 gsheet_name = 'SUPER Project (All Data)'
 json_credentials = 'super-project-324706-3389a6fde047.json'
@@ -77,4 +79,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-p", "--port", type=int, default=8080)
+    args = parser.parse_args()
+
+    start_server(main, port=args.port)
+    # main()
